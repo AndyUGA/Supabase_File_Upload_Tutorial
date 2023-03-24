@@ -1,7 +1,7 @@
+import { Auth } from '@supabase/auth-ui-react'
 import {
-  Auth,
   ThemeSupa,
-} from '@supabase/auth-ui-react'
+} from '@supabase/auth-ui-shared'
 import { useEffect, useState } from "react";
 
 import { createClient } from '@supabase/supabase-js'
@@ -44,6 +44,8 @@ function App() {
 
   const signout = async () => {
     await supabase.auth.signOut();
+    setIsLoggedIn(false);
+    setUserId('');
 
   }
   const fetchNotes = async () => {
@@ -64,12 +66,10 @@ function App() {
     await fetchNotes();
     setNewNote('');
   }
-
   useEffect(() => {
-
     getUser();
     fetchNotes();
-    const channel = supabase
+    supabase
       .channel('table-db-changes')
       .on(
         'postgres_changes',
@@ -79,12 +79,10 @@ function App() {
           table: 'notes',
         },
         (payload) => {
-          console.log(81, payload);
           fetchNotes();
         }
       )
       .subscribe()
-    console.log(84);
   }, [])
 
   return (
@@ -95,15 +93,19 @@ function App() {
           <div>
             {notes.map(notes => (
               <div>
-                {notes.description} - {notes.id}
+                {notes.description}
               </div>
             ))}
           </div>
         )}
         <div>
+          <br />
+          <br />
+
           <input placeholder='Add Note' value={newNote} onChange={(e) => {
             setNewNote(e.target.value);
           }} />
+
           <button onClick={addNotes}> Save Note </button>
         </div>
 
