@@ -102,7 +102,6 @@ function App() {
           return (<>
             <div>
               <img src={`https://ovlhvogwndcqxaskukrv.supabase.co/storage/v1/object/public/uploads/8cde5d0d-7beb-4ab0-99aa-eaf24e8d2557/${media.name}`} />
-              {/* https://ovlhvogwndcqxaskukrv.supabase.co/storage/v1/object/public/uploads/8cde5d0d-7beb-4ab0-99aa-eaf24e8d2557*/}
             </div>
           </>
           )
