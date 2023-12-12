@@ -99,12 +99,13 @@ function App() {
         </div>
 
         {media.map((media) => {
-          return (<>
-            <div>
-              <img src={`https://ovlhvogwndcqxaskukrv.supabase.co/storage/v1/object/public/uploads/8cde5d0d-7beb-4ab0-99aa-eaf24e8d2557/${media.name}`} />
+          return (
+            <div key={media.name}>
+                <img
+                    src={`https://ovlhvogwndcqxaskukrv.supabase.co/storage/v1/object/public/uploads/${userId}/${media.name}`}
+                />
             </div>
-          </>
-          )
+        );
         })}
         <div className='mt-5'>
           <button onClick={signout}>
@@ -118,5 +119,3 @@ function App() {
 
 
 
-
-export default App;
